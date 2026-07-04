@@ -4,6 +4,7 @@ import './ui/Group.css';
 import type IGroupProduct from '../../entities/group/model/IGroupProduct';
 import GroupApi from '../../entities/group/api/GroupApi';
 import ProductCard from './ui/ProductCard';
+import GroupsWidget from '../../widgets/groups/GroupsWidget';
 
 export default function Group() {
     const { slug } = useParams();
@@ -17,6 +18,7 @@ export default function Group() {
     return (
         <div className="container">
             <h1>{groupProduct?.group.name ?? slug}</h1>
+            <GroupsWidget />
             {groupProduct ? (
                 <div className="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 g-4">
                     {groupProduct.products.map((gp) => (

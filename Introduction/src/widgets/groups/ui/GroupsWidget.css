@@ -1,0 +1,80 @@
+.groups-widget {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+}
+.groups-crop {
+    flex: 1;
+    overflow-x: auto;
+    scrollbar-width: none;
+    scroll-behavior: smooth;
+}
+.groups-crop::-webkit-scrollbar {
+    display: none;
+}
+.groups-container {
+    display: flex;
+    flex-direction: row;
+    gap: 15px;
+    /* місце знизу, щоб підказка не обрізалась контейнером прокрутки */
+    padding-bottom: 6rem;
+}
+.groups-item {
+    position: relative;
+    flex: 0 0 auto;
+    text-align: center;
+    text-decoration: none;
+    color: #444;
+}
+.groups-item img {
+    width: 144px;
+    display: block;
+}
+.groups-item:hover,
+.groups-item:focus-visible {
+    z-index: 30;
+}
+
+/* Підказка (tooltip) при наведенні миші */
+.groups-tooltip {
+    position: absolute;
+    top: calc(100% + 0.5rem);
+    left: 50%;
+    transform: translateX(-50%) translateY(-4px);
+    z-index: 20;
+    width: 15rem;
+    padding: 0.5rem 0.75rem;
+    background: #1f2028;
+    color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+    text-align: left;
+    font-size: 0.85rem;
+    line-height: 1.35;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transition: opacity 0.15s ease, transform 0.15s ease;
+}
+.groups-tooltip::after {
+    content: '';
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    border: 6px solid transparent;
+    border-bottom-color: #1f2028;
+}
+.groups-tooltip__desc {
+    color: #c7c7d1;
+}
+.groups-item:hover .groups-tooltip,
+.groups-item:focus-visible .groups-tooltip {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
