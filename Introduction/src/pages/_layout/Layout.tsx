@@ -1,7 +1,11 @@
+import { useContext } from 'react';
 import { Link, Outlet } from 'react-router-dom';
 import './ui/Layout.css';
+import AppContext from '../../features/_context/AppContext';
 
 export default function Layout() {
+    const { cart } = useContext(AppContext);
+
     return (
         <>
             <nav className="navbar navbar-expand-sm bg-body-tertiary border-bottom">
@@ -22,6 +26,12 @@ export default function Layout() {
                         <ul className="navbar-nav mb-2 mb-lg-0">
                             <li className="nav-item">
                                 <Link to="/" className="nav-link"><i className="bi bi-house"></i></Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/cart" className="nav-link cart-nav">
+                                    <span>{cart.cartItems.length}</span>
+                                    <i className="bi bi-cart"></i>
+                                </Link>
                             </li>
                             <li className="nav-item">
                                 <Link to="/privacy" className="nav-link">Політика конфіденційності</Link>
