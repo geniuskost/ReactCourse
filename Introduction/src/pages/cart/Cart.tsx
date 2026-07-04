@@ -7,6 +7,10 @@ import type ICartItem from '../../entities/cart/model/ICartItem';
 export default function Cart() {
     const { cart } = useContext(AppContext);
 
+    // Сума цін позицій без знижок та підсумкова вигода по кошику.
+    const fullSum = cart.cartItems.reduce((acc, ci) => acc + ci.product.price * ci.quantity, 0);
+    const benefit = fullSum - cart.price;
+
     return (
         <div className="row mx-3">
             <div className="col col-12 col-lg-8">
@@ -33,7 +37,17 @@ export default function Cart() {
                     )}
                     <div className="d-flex justify-content-between px-2 mb-1 border-top py-2">
                         <span>До сплати</span>
-                        <b>₴ {cart.price.pad2()}</b>
+                        {/* Д.З.: якщо загальна ціна кошика менша за суму цін позицій —
+                            показати елемент вигоди (-₴X) над повною сумою */}
+                        {cart.price < fullSum ? (
+                            <span className="cart-benefit">
+                                <span className="cart-benefit__save">-₴{benefit.pad2()}</span>
+                                <span className="cart-benefit__full">₴ {fullSum.pad2()}</span>
+                                <b>₴ {cart.price.pad2()}</b>
+                            </span>
+                        ) : (
+                            <b>₴ {cart.price.pad2()}</b>
+                        )}
                     </div>
                 </div>
                 <button className="btn btn-success w-100 mt-2">Оформити замовлення</button>
@@ -63,6 +77,8 @@ function CartItemView({ ci }: { ci: ICartItem }) {
         }
     };
 
+    const fullPrice = ci.product.price * ci.quantity;
+
     return (
         <div className="row mb-3 align-items-center">
             <div className="col col-2">
@@ -73,7 +89,14 @@ function CartItemView({ ci }: { ci: ICartItem }) {
             <div className="col col-3 text-center">
                 <Counter initialQuantity={ci.quantity} onChange={onQuantityChange} showDoNotCall={false} />
             </div>
-            <div className="col col-1 col-sm-2 text-center fw-bold">₴ {ci.price.pad2()}</div>
+            <div className="col col-1 col-sm-2 text-center">
+                <span className="position-relative">
+                    ₴ {ci.price.pad2()}
+                    {ci.price < fullPrice && (
+                        <span className="strike-ci-price">₴ {fullPrice.pad2()}</span>
+                    )}
+                </span>
+            </div>
         </div>
     );
 }

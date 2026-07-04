@@ -6,3 +6,21 @@
     text-decoration: line-through;
     color: gray;
 }
+
+/* Елемент вигоди по кошику */
+.cart-benefit {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: flex-end;
+    line-height: 1.2;
+}
+.cart-benefit__save {
+    color: #198754;
+    font-weight: 700;
+    font-size: 0.85rem;
+}
+.cart-benefit__full {
+    color: gray;
+    font-size: 0.8rem;
+    text-decoration: line-through;
+}
