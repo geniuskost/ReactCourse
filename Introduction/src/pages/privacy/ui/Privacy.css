@@ -1,0 +1,9 @@
+.privacy {
+    max-width: 800px;
+    margin-inline: auto;
+    padding-block: 1.5rem 3rem;
+}
+
+.privacy h2 {
+    margin-top: 1.5rem;
+}

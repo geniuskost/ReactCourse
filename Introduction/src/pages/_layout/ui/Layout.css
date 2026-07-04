@@ -1,0 +1,23 @@
+main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+footer {
+    padding: 1em 2em;
+    text-align: center;
+}
+.nav-link {
+    font-size: larger;
+}
+.cart-nav {
+    position: relative;
+}
+.cart-nav span {
+    position: absolute;
+    right: -2px;
+    top: 0;
+    font-size: smaller;
+    color: #198754;
+    font-weight: 700;
+}
