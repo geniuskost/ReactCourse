@@ -9,6 +9,10 @@ const AppContext = createContext<IAppContext>({
     setCart() {
         throw new Error('setCart: not implemented');
     },
+    user: undefined,
+    setUser() {
+        throw new Error('setUser: not implemented');
+    },
 });
 
 export default AppContext;

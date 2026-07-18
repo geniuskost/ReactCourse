@@ -4,7 +4,7 @@ import './ui/Layout.css';
 import AppContext from '../../features/_context/AppContext';
 
 export default function Layout() {
-    const { cart } = useContext(AppContext);
+    const { cart, user } = useContext(AppContext);
 
     return (
         <>
@@ -35,6 +35,11 @@ export default function Layout() {
                             </li>
                             <li className="nav-item">
                                 <Link to="/privacy" className="nav-link">Політика конфіденційності</Link>
+                            </li>
+                            <li className="nav-item">
+                                <Link to="/auth" className="nav-link">
+                                    <i className="bi bi-person"></i> {user ? user.login : 'Вхід'}
+                                </Link>
                             </li>
                         </ul>
                         <form className="d-flex" role="search">
