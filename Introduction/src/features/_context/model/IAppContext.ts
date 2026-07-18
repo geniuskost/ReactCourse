@@ -6,4 +6,6 @@ export default interface IAppContext {
     setCart(cart: ICart): void;
     user?: IUser;
     setUser(user: IUser | undefined): void;
+    isLoading: boolean;
+    setLoading(isLoading: boolean): void;
 }

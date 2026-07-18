@@ -56,11 +56,12 @@ export default function Auth() {
 function SignIn({ onForgotPassword }: { onForgotPassword: () => void }) {
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const { setUser } = useContext(AppContext);
+    const { setUser, setLoading } = useContext(AppContext);
 
     const isFormValid = login.length > 2 && password.length > 2;
 
     const signInClick = () => {
+        setLoading(true);
         UserApi.authenticate(login, password)
             .then(u => {
                 rememberUser(u);
@@ -70,7 +71,8 @@ function SignIn({ onForgotPassword }: { onForgotPassword: () => void }) {
                 if (err === 401) {
                     alert('У вході відмовлено. Перевірте введені дані');
                 }
-            });
+            })
+            .finally(() => setLoading(false));
     };
 
     return (

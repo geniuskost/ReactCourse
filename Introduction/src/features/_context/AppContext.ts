@@ -13,6 +13,10 @@ const AppContext = createContext<IAppContext>({
     setUser() {
         throw new Error('setUser: not implemented');
     },
+    isLoading: false,
+    setLoading() {
+        throw new Error('setLoading: not implemented');
+    },
 });
 
 export default AppContext;
