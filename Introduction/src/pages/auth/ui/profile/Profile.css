@@ -1,0 +1,32 @@
+.profile-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex: 1;
+    padding: 2rem 0;
+}
+.profile-card {
+    background-color: #e0e0e0;
+    width: 360px;
+    border: 1px solid lightgray;
+    border-radius: 10px;
+    box-shadow: 0 0 6px lightgray;
+}
+.profile-header {
+    text-align: center;
+    margin: 10px 0;
+}
+.profile-info {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+.profile-row {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+.profile-danger-zone {
+    border-top: 1px solid lightgray;
+    padding-top: 1rem;
+}

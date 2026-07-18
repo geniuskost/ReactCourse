@@ -2,6 +2,7 @@ import { useContext, useState } from 'react';
 import './ui/Auth.css';
 import SignUp from './ui/sign_up/SignUp';
 import ForgotPassword from './ui/forgot_password/ForgotPassword';
+import Profile from './ui/profile/Profile';
 import UserApi from '../../entities/user/api/UserApi';
 import AppContext from '../../features/_context/AppContext';
 import { rememberUser } from '../../entities/user/lib/UserLib';
@@ -19,15 +20,7 @@ export default function Auth() {
     const [pageMode, setPageMode] = useState<PageModes>(PageModes.signIn);
 
     if (user) {
-        return (
-            <div className="auth-container">
-                <div className="auth-form">
-                    <div className="auth-form-content mx-3 my-4">
-                        Ви увійшли як <strong>{user.login}</strong>
-                    </div>
-                </div>
-            </div>
-        );
+        return <Profile />;
     }
 
     return (
