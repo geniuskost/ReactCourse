@@ -9,6 +9,8 @@ import NotFound from './pages/not-found/NotFound';
 import Auth from './pages/auth/Auth';
 import AppContext from './features/_context/AppContext';
 import Preloader from './features/preloader/Preloader';
+import Alert from './features/alert/Alert';
+import type IAlertData from './features/alert/model/IAlertData';
 import type ICart from './entities/cart/model/ICart';
 import CartApi from './entities/cart/api/CartApi';
 import type IUser from './entities/user/model/IUser';
@@ -18,6 +20,7 @@ function App() {
   const [cart, setCart] = useState<ICart>({ cartItems: [], price: 0 });
   const [user, setUser] = useState<IUser | undefined>();
   const [isLoading, setLoading] = useState<boolean>(false);
+  const [alertData, setAlertData] = useState<IAlertData | null>(null);
 
   // перед зміною стану перераховуємо знижки по кошику
   const updateCart = (next: ICart): void => {
@@ -30,7 +33,9 @@ function App() {
   }, []);
 
   return (
-    <AppContext.Provider value={{ cart, setCart: updateCart, user, setUser, isLoading, setLoading }}>
+    <AppContext.Provider
+      value={{ cart, setCart: updateCart, user, setUser, isLoading, setLoading, showAlert: setAlertData }}
+    >
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Layout />}>
@@ -44,6 +49,7 @@ function App() {
         </Routes>
       </BrowserRouter>
       {isLoading && <Preloader />}
+      {alertData && <Alert data={alertData} />}
     </AppContext.Provider>
   );
 }

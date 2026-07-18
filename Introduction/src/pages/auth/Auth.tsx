@@ -56,7 +56,7 @@ export default function Auth() {
 function SignIn({ onForgotPassword }: { onForgotPassword: () => void }) {
     const [login, setLogin] = useState<string>('');
     const [password, setPassword] = useState<string>('');
-    const { setUser, setLoading } = useContext(AppContext);
+    const { setUser, setLoading, showAlert } = useContext(AppContext);
 
     const isFormValid = login.length > 2 && password.length > 2;
 
@@ -69,7 +69,11 @@ function SignIn({ onForgotPassword }: { onForgotPassword: () => void }) {
             })
             .catch(err => {
                 if (err === 401) {
-                    alert('У вході відмовлено. Перевірте введені дані');
+                    showAlert({
+                        title: 'Помилка входу',
+                        message: 'У вході відмовлено. Перевірте введені дані',
+                        isCancelable: true,
+                    });
                 }
             })
             .finally(() => setLoading(false));

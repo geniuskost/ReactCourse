@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import './SignUp.css';
+import AppContext from '../../../../features/_context/AppContext';
 
 interface IFormData {
     login: string;
@@ -27,6 +28,7 @@ const repeatFeedback = 'Паролі не співпадають';
 
 export default function SignUp() {
     const [formData, setFormData] = useState<IFormData>(initialFormData);
+    const { showAlert } = useContext(AppContext);
 
     const valids = {
         login: formData.login.length > 2,
@@ -114,7 +116,11 @@ export default function SignUp() {
                 onClick={
                     isFormValid
                         ? () => {
-                              alert(`Користувача "${formData.login}" зареєстровано`);
+                              showAlert({
+                                  title: 'Реєстрація завершена',
+                                  message: `Користувача "${formData.login}" зареєстровано`,
+                                  isCancelable: true,
+                              });
                               setFormData(initialFormData);
                           }
                         : undefined
